@@ -87,12 +87,12 @@ def dumpBinary(info):
 
 if __name__ == '__main__':
     arg_parser = argparse.ArgumentParser(description='Dump SDK header files')
-    arg_parser.add_argument('-s', dest='sdk', help='The SDK version to use (eg. iphoneos7.1)')
-    arg_parser.add_argument('-o', dest='output', help='The output directory (defaults to the current directory)')
+    arg_parser.add_argument('-s', dest='sdk', default=DEFAULT_SDK, help='The SDK version to use (eg. iphoneos7.1)')
+    arg_parser.add_argument('-o', dest='output', default=os.getcwd(), help='The output directory (defaults to the current directory)')
 
     args = arg_parser.parse_args()
-    outdir = path.abspath(args.output) or os.getcwd()
-    sdk = args.sdk or DEFAULT_SDK
+    outdir = path.abspath(args.output)
+    sdk = args.sdk
 
     sdkPath = getSDKPath(sdk)
     if not sdkPath:
